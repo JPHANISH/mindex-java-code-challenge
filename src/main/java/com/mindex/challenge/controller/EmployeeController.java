@@ -1,6 +1,8 @@
 package com.mindex.challenge.controller;
 
+import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
+import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,4 +37,28 @@ public class EmployeeController {
         employee.setEmployeeId(id);
         return employeeService.update(employee);
     }
+    
+    @GetMapping("/reportingStructure/{id}")
+	public ReportingStructure getReportingStructureById(@PathVariable String id)
+	{
+	    LOG.debug("Received reporting structure get request for id [{}]", id);
+
+	    return employeeService.getReportingStructureById(id);
+	}
+
+    @PostMapping("/compensation")
+	public Compensation create(@RequestBody Compensation compensation)
+	{
+	    LOG.debug("Received employee create request for employee id [{}]", compensation.getEmployeeId());
+
+	    return employeeService.createCompensation(compensation);
+	}
+
+	@GetMapping("/compensation/{id}")
+	public Compensation getCompensationByEmployeeId(@PathVariable String id)
+	{
+	    LOG.debug("Received compensation get request for id [{}]", id);
+
+	    return employeeService.getCompensationByEmployeeId(id);
+	}
 }
